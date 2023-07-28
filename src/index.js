@@ -39,16 +39,17 @@ refs.selectEl.addEventListener('change', breedCheck);
 function breedCheck(evt) {
     evt.preventDefault();
     const breed = evt.target.value;
-    refs.loaderEl.hidden = false;
+  refs.loaderEl.hidden = false;
+  clear();
     fetchCatByBreed(breed)
-    .then(data => renderCatInfo(data[0]) )
+      .then(data => renderCatInfo(data[0]))
     .catch(()=>Notify.failure('Oops! Something went wrong! Try reloading the page!'))
 
  }
 
 function renderCatInfo(cat) {
-    refs.loaderEl.hidden = true;
-    refs.infoEl.innerHTML = markupCatInfo(cat, cat.breeds[0]);
+  refs.loaderEl.hidden = true;
+  refs.infoEl.innerHTML = markupCatInfo(cat, cat.breeds[0]);
 }
 
 function markupCatInfo({ url }, { name, description, temperament }) {
@@ -58,4 +59,8 @@ function markupCatInfo({ url }, { name, description, temperament }) {
         <p>${description}</p>
         <p>${temperament}</p>
       </div>`;
+}
+
+function clear() {
+  refs.infoEl.innerHTML = '';
 }
