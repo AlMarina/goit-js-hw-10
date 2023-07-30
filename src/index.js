@@ -10,8 +10,10 @@ const refs = {
     infoEl: document.querySelector('.cat-info'),
 }
 
-refs.selectEl.hidden = true;
-refs.errorEl.hidden = true;
+disable(refs.selectEl);
+// refs.selectEl.hidden = true;
+disable(refs.errorEl);
+// refs.errorEl.hidden = true;
 
 fetchBreeds()
     .then(renderBreedSelect)
@@ -20,8 +22,10 @@ fetchBreeds()
 
 
 function renderBreedSelect(data) { 
-    refs.loaderEl.hidden = true;
-    refs.selectEl.hidden = false;
+  disable(refs.loaderEl);
+    // refs.loaderEl.hidden = true;
+  // refs.selectEl.hidden = false;
+  enable(refs.selectEl);
   refs.selectEl.innerHTML = markupBreedSelect(data);
 }
 
@@ -63,4 +67,11 @@ function markupCatInfo({ url }, { name, description, temperament }) {
 
 function clear() {
   refs.infoEl.innerHTML = '';
+}
+
+function disable(el) { 
+el.hidden = true;
+}
+function enable(el) { 
+  el.hidden = false;
 }
